@@ -13,6 +13,8 @@ public class Tree
     public GameObject nodewallPrefab;
 
     public GameObject wall;
+
+    public GameObject coin; 
     public void createChildren(MazeNode parent,int distanceLeft,int distanceRight)
     {
         Vector3 directionleft=rotateLeft(parent.IncomingDirection);
@@ -33,8 +35,10 @@ public class Tree
         Vector3 midpointRight=GetMidpoint(parent,right);
         float GetDistanceLeft=GetDistance(parent,left);
         float GetDistanceRight=GetDistance(parent,right);
-        parent.createLeftWall(wall,midpointLeft,parent.IncomingDirection,GetDistanceLeft-1);
-        parent.createRightWall(wall,midpointRight,parent.IncomingDirection,GetDistanceRight-1);
+        float val=Random.value;
+        Debug.Log(val);
+        parent.createLeftWall(wall,midpointLeft,parent.IncomingDirection,GetDistanceLeft-1,coin,val<=0.5);
+        parent.createRightWall(wall,midpointRight,parent.IncomingDirection,GetDistanceRight-1,coin,val>0.5);
 
     }
     public Vector3 rotateLeft(Vector3 direction)
@@ -46,10 +50,11 @@ public class Tree
         return new Vector3(-direction.z, direction.y, direction.x);
     }
 
-    public Tree(GameObject prefab,GameObject wallprefab,GameObject wall, Vector3 initialpos, Vector3 initialDirection)
+    public Tree(GameObject prefab,GameObject wallprefab,GameObject coinprefab,GameObject wall, Vector3 initialpos, Vector3 initialDirection)
     {
         nodePrefab=prefab;
         nodewallPrefab=wallprefab;
+        coin=coinprefab;
         this.wall=wall;
         firstNode=new MazeNode(initialpos,0,initialDirection,nodePrefab,nodewallPrefab);
         currentNode=firstNode;
@@ -101,6 +106,10 @@ public class Tree
                 if(node.initialnodeWall!=null)
                 {
                     node.initialnodeWall.SetActive(false);
+                }  
+                if(node.coin!=null)
+                {
+                    node.coin.SetActive(false);
                 }
             }
         }
@@ -119,11 +128,16 @@ public class Tree
         {
             mazeNode.rightWall.SetActive(true);
         }
-        activeNode.Add(mazeNode);
         if(mazeNode.initialnodeWall!=null)
         {
             mazeNode.initialnodeWall.SetActive(true);
         }
+        if(mazeNode.coin!=null)
+        {
+            mazeNode.coin.SetActive(true);
+        }
+        activeNode.Add(mazeNode);
+        
 
     // Add the parent node, if it exists, and set it active
         if (mazeNode.Parent != null)
@@ -132,6 +146,10 @@ public class Tree
             mazeNode.Parent.nodewallobject.SetActive(true);
             mazeNode.Parent.leftWall.SetActive(true);
             mazeNode.Parent.rightWall.SetActive(true);
+            if(mazeNode.Parent.coin!=null)
+            {
+                mazeNode.Parent.coin.SetActive(true);
+            }
             activeNode.Add(mazeNode.Parent);
         }   
 
