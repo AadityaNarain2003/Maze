@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coin
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 926b8f1f813e4ff4e8adf38dca235494, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67,6 +71,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 926b8f1f813e4ff4e8adf38dca235494, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2616445651457540969}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 926b8f1f813e4ff4e8adf38dca235494, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -444391330637158526}
   m_SourcePrefab: {fileID: 100100000, guid: 926b8f1f813e4ff4e8adf38dca235494, type: 3}
 --- !u!1 &8949798038917887321 stripped
 GameObject:
@@ -94,3 +101,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!135 &-444391330637158526
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8949798038917887321}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.0000002
+  m_Center: {x: 0, y: 0, z: 0}

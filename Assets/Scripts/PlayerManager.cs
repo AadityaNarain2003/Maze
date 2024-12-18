@@ -16,4 +16,12 @@ public class PlayerManager : MonoBehaviour
     {
         
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        //this is for Node and player
+        if (other.gameObject.layer == LayerMask.NameToLayer("coin") )
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }

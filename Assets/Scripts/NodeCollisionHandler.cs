@@ -11,6 +11,7 @@ public class NodeCollisionHandler : MonoBehaviour
     private bool hasTriggered=false;
     private void OnTriggerEnter(Collider other)
     {
+        //this is for Node and player
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") && hasTriggered==false)
         {
             hasTriggered=true;
