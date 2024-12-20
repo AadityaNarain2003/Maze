@@ -22,6 +22,8 @@ public class MazeNode
     public GameObject nodewallobject;
 
     public GameObject coin;
+
+    public GameObject fireball;
     public bool isCoinPresent;
 
     private GameObject coinAnimationHandlerObject;
@@ -40,6 +42,7 @@ public class MazeNode
         initialnodeWall = null;
         coin = null;
         isCoinPresent = false;
+        fireball=null;
 
         nodeobject = GameObject.Instantiate(node, position, Quaternion.identity);
 
@@ -53,7 +56,7 @@ public class MazeNode
         nodeComponent.Initialize(this);
     }
 
-    public void createLeftWall(GameObject wall, Vector3 position, Vector3 direction, float scale, GameObject coin, bool isCoin)
+    public void createLeftWall(GameObject wall, Vector3 position, Vector3 direction, float scale, GameObject coin, bool isCoin,GameObject fire, bool isFire)
     {
         Quaternion directionLook = Quaternion.LookRotation(direction);
         leftWall = GameObject.Instantiate(wall, position, directionLook);
@@ -73,9 +76,30 @@ public class MazeNode
             // Start the coroutine to animate the coin after it has been instantiated
             coinAnimationHandler.StartCoroutine(coinAnimationHandler.StartCoinAnimation(this.coin));
         }
+        if(isFire && this.Level!=0)
+        {
+            Vector3 pos=this.Left.Position;
+            Vector3 currpos=this.Position;
+            pos.y=0.5F;
+            currpos.y=0.5F;
+
+           this.fireball = GameObject.Instantiate(fire, pos, Quaternion.identity);
+
+            // Ensure the fireball has a Rigidbody
+            Rigidbody rb = fireball.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                Debug.Log("here");
+                // Calculate direction from 'pos' to 'currpos'
+                Vector3 dir = (currpos - pos).normalized;
+
+                // Set the velocity to 2 units per second in the calculated direction
+                rb.velocity = dir * 2f;
+            }
+        }   
     }
 
-    public void createRightWall(GameObject wall, Vector3 position, Vector3 direction, float scale, GameObject coin, bool isCoin)
+    public void createRightWall(GameObject wall, Vector3 position, Vector3 direction, float scale, GameObject coin, bool isCoin,GameObject fire, bool isFire)
     {
         Quaternion directionLook = Quaternion.LookRotation(direction);
         rightWall = GameObject.Instantiate(wall, position, directionLook);
@@ -94,6 +118,28 @@ public class MazeNode
 
             // Start the coroutine to animate the coin after it has been instantiated
             coinAnimationHandler.StartCoroutine(coinAnimationHandler.StartCoinAnimation(this.coin));
+        }
+        if(isFire && this.Level!=0)
+        {
+            Vector3 pos=this.Right.Position;
+            Vector3 currpos=this.Position;
+            pos.y=0.5F;
+            currpos.y=0.5F;
+
+           this.fireball = GameObject.Instantiate(fire, pos, Quaternion.identity);
+
+            // Ensure the fireball has a Rigidbody
+            Rigidbody rb = fireball.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                Debug.Log("here");
+                // Calculate direction from 'pos' to 'currpos'
+                Vector3 dir = (currpos - pos).normalized;
+
+                // Set the velocity to 2 units per second in the calculated direction
+                rb.velocity = dir * 2f;
+            }
+
         }
     }
 }

@@ -14,6 +14,7 @@ public class Tree
 
     public GameObject wall;
 
+    public GameObject fire;
     public GameObject coin; 
     public void createChildren(MazeNode parent,int distanceLeft,int distanceRight)
     {
@@ -37,8 +38,8 @@ public class Tree
         float GetDistanceRight=GetDistance(parent,right);
         float val=Random.value;
         Debug.Log(val);
-        parent.createLeftWall(wall,midpointLeft,parent.IncomingDirection,GetDistanceLeft-1,coin,val<=0.5);
-        parent.createRightWall(wall,midpointRight,parent.IncomingDirection,GetDistanceRight-1,coin,val>0.5);
+        parent.createLeftWall(wall,midpointLeft,parent.IncomingDirection,GetDistanceLeft-1,coin,val<=0.5,fire,val>0.5);
+        parent.createRightWall(wall,midpointRight,parent.IncomingDirection,GetDistanceRight-1,coin,val>0.5,fire,val<=0.5);
 
     }
     public Vector3 rotateLeft(Vector3 direction)
@@ -50,12 +51,13 @@ public class Tree
         return new Vector3(-direction.z, direction.y, direction.x);
     }
 
-    public Tree(GameObject prefab,GameObject wallprefab,GameObject coinprefab,GameObject wall, Vector3 initialpos, Vector3 initialDirection)
+    public Tree(GameObject prefab,GameObject wallprefab,GameObject coinprefab,GameObject fire,GameObject wall, Vector3 initialpos, Vector3 initialDirection)
     {
         nodePrefab=prefab;
         nodewallPrefab=wallprefab;
         coin=coinprefab;
         this.wall=wall;
+        this.fire=fire;
         firstNode=new MazeNode(initialpos,0,initialDirection,nodePrefab,nodewallPrefab);
         currentNode=firstNode;
         

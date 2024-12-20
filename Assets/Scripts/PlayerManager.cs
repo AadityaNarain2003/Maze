@@ -23,5 +23,9 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
+        if(other.gameObject.layer == LayerMask.NameToLayer("fireball"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

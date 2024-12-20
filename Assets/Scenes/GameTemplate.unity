@@ -462,6 +462,7 @@ MonoBehaviour:
   nodewallprefab: {fileID: 1937032821064152088, guid: e338d720047148842a824aaa45ef3f0e, type: 3}
   wall: {fileID: 8853584380413911238, guid: d48d6032877330948aae497e8a0d9626, type: 3}
   coinprefab: {fileID: 8949798038917887321, guid: 49c30a68f756b4249816f73ce495afed, type: 3}
+  fireprefab: {fileID: 8458614966707265905, guid: 5db4a95d9d2149f469ba809e72d671ad, type: 3}
 --- !u!114 &527739146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,7 +470,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527739143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96efe74231375a346a6cf621a41b44b5, type: 3}
   m_Name: 

@@ -11,13 +11,15 @@ public class MazeGenerator : MonoBehaviour
 
     public GameObject coinprefab;
     public Tree gameTree;
+
+    public GameObject fireprefab;
     // Start is called before the first frame update
     void Start()
     {
         Vector3 initialPosition= new Vector3(0,1.5f,0);
         Vector3 initialDirection = new Vector3(0, 0,1);
         //Debug.Log("Hello");
-        gameTree=new Tree(nodeprefab,nodewallprefab,coinprefab,wall,initialPosition,initialDirection);
+        gameTree=new Tree(nodeprefab,nodewallprefab,coinprefab,fireprefab,wall,initialPosition,initialDirection);
 
         Vector3 wallPosition = gameTree.currentNode.Position - gameTree.currentNode.IncomingDirection * 0.5f;
         Quaternion wallRotation = Quaternion.LookRotation(gameTree.currentNode.IncomingDirection);

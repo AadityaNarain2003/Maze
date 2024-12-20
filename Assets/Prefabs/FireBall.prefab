@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6431439900314439997}
   - component: {fileID: 1257745317505092019}
   - component: {fileID: 205369263226645214}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sun Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4853,7 +4853,7 @@ GameObject:
   - component: {fileID: 3317110777935052488}
   - component: {fileID: 2052442285273916595}
   - component: {fileID: 4334720412745267724}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sun FX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9696,7 +9696,8 @@ GameObject:
   - component: {fileID: 2111224804448653623}
   - component: {fileID: 9078691134064841990}
   - component: {fileID: 4523633339622091784}
-  m_Layer: 0
+  - component: {fileID: 726442752662821630}
+  m_Layer: 10
   m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9743,7 +9744,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -9791,3 +9792,30 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &726442752662821630
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8458614966707265905}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
