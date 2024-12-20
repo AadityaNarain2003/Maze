@@ -137,7 +137,7 @@ public class MazeNode
                 Vector3 dir = (currpos - pos).normalized;
 
                 // Set the velocity to 2 units per second in the calculated direction
-                rb.velocity = dir * 2f;
+                rb.velocity = dir * 0.75f;
             }
 
         }
