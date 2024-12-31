@@ -18,7 +18,10 @@ public class MazeGenerator : MonoBehaviour
     {
         Vector3 initialPosition= new Vector3(0,1.5f,0);
         Vector3 initialDirection = new Vector3(0, 0,1);
-        //Debug.Log("Hello");
+        Debug.Log("Hello");
+        if (wall == null) Debug.LogError("Wall prefab is null at MazeGenerator!");
+        if (coinprefab == null) Debug.LogError("Coin prefab is null at MazeGenerator!");
+        if (fireprefab == null) Debug.LogError("Fire prefab is null at MazeGenerator!");
         gameTree=new Tree(nodeprefab,nodewallprefab,coinprefab,fireprefab,wall,initialPosition,initialDirection);
 
         Vector3 wallPosition = gameTree.currentNode.Position - gameTree.currentNode.IncomingDirection * 0.5f;
@@ -56,6 +59,4 @@ public class MazeGenerator : MonoBehaviour
             gameTree.createChildren(mazeNode, (int)randomLeftDistance,(int) randomRightDistance);
         }
     }
-
-    void update(){}
 }

@@ -23,12 +23,12 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"Time Left: {timer.TimeLeft}");
+        //Debug.Log($"Time Left: {timer.TimeLeft}");
 
         // Check if time has run out
         if (timer.TimeLeft <= 0)
         {
-            Debug.Log("Time's up!");
+           // Debug.Log("Time's up!");
         }
     }
 

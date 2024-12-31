@@ -62,6 +62,9 @@ public class MazeNode
         leftWall = GameObject.Instantiate(wall, position, directionLook);
         Vector3 wallScale = new Vector3(scale, 1, 1);
         leftWall.transform.localScale = wallScale;
+        if (wall == null) Debug.LogError("Wall prefab is null!");
+        if (coin == null) Debug.LogError("Coin prefab is null!");
+        if (fire == null) Debug.LogError("Fire prefab is null!");
 
         if (isCoin)
         {

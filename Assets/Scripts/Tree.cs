@@ -16,6 +16,20 @@ public class Tree
 
     public GameObject fire;
     public GameObject coin; 
+
+    public Tree(GameObject prefab,GameObject wallprefab,GameObject coinprefab,GameObject fire,GameObject wall, Vector3 initialpos, Vector3 initialDirection)
+    {
+        nodePrefab=prefab;
+        nodewallPrefab=wallprefab;
+        coin=coinprefab;
+        this.wall=wall;
+        this.fire=fire;
+        firstNode=new MazeNode(initialpos,0,initialDirection,nodePrefab,nodewallPrefab);
+        currentNode=firstNode;
+        
+        activeNode = new List<MazeNode>();
+        activeNode.Add(firstNode);
+    }
     public void createChildren(MazeNode parent,int distanceLeft,int distanceRight)
     {
         Vector3 directionleft=rotateLeft(parent.IncomingDirection);
@@ -51,19 +65,7 @@ public class Tree
         return new Vector3(-direction.z, direction.y, direction.x);
     }
 
-    public Tree(GameObject prefab,GameObject wallprefab,GameObject coinprefab,GameObject fire,GameObject wall, Vector3 initialpos, Vector3 initialDirection)
-    {
-        nodePrefab=prefab;
-        nodewallPrefab=wallprefab;
-        coin=coinprefab;
-        this.wall=wall;
-        this.fire=fire;
-        firstNode=new MazeNode(initialpos,0,initialDirection,nodePrefab,nodewallPrefab);
-        currentNode=firstNode;
-        
-        activeNode = new List<MazeNode>();
-        activeNode.Add(firstNode);
-    }
+    
     public Vector3 GetMidpoint(MazeNode nodeA, MazeNode nodeB)
     {
         // Ensure neither node is null before accessing their positions
