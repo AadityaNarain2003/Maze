@@ -25,6 +25,7 @@ public class Timer : MonoBehaviour
         {
             TimeLeft -= Time.deltaTime; // Reduce time by seconds
             TimeLeft = Mathf.Max(0, TimeLeft); // Ensure it doesn't go below zero
+            Debug.Log("" + TimeLeft);
         }
     }
     public void AddTime(float time)
