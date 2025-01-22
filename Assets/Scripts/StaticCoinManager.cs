@@ -35,20 +35,21 @@ public class StaticCoinManager : MonoBehaviour
     public void HandleCoinCollection(GameObject coin)
     {
         // Remove the coin from the list and destroy it
+        Vector3 position= coin.transform.position;
         activeCoins.Remove(coin);
         Destroy(coin);
 
         // Start coroutine to generate a new coin at a random fixed position after a delay
-        StartCoroutine(GenerateCoinAfterDelay());
+        StartCoroutine(GenerateCoinAfterDelay(position));
     }
 
     // Coroutine to generate a new coin at a random fixed position after the specified delay
-    private IEnumerator GenerateCoinAfterDelay()
+    private IEnumerator GenerateCoinAfterDelay(Vector3 position)
     {
         yield return new WaitForSeconds(coinGenerationDelay);
 
         // Pick a random position from the predefined list of spawn positions
-        Vector3 spawnPosition = spawnPositions[Random.Range(0, spawnPositions.Count)];
-        GenerateCoin(spawnPosition);
+        //Vector3 spawnPosition = spawnPositions[Random.Range(0, spawnPositions.Count)];
+        GenerateCoin(position);
     }
 }
