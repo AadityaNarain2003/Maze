@@ -46,6 +46,7 @@ public class StaticCoinManager : MonoBehaviour
     // Coroutine to generate a new coin at a random fixed position after the specified delay
     private IEnumerator GenerateCoinAfterDelay(Vector3 position)
     {
+        Debug.Log("CoRoutine for Coin Called");
         yield return new WaitForSeconds(coinGenerationDelay);
 
         // Pick a random position from the predefined list of spawn positions

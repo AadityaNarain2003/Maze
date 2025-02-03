@@ -13,6 +13,7 @@ public class CoinAnimationHandler : MonoBehaviour
         Animator animator = coin.GetComponent<Animator>();
         if (animator != null)
         {
+            Debug.Log("Animator Coin Entered");
             animator.Rebind(); // Reset to default state
             animator.Update(0); // Apply the first frame immediately
             animator.Play("Coin_Animation");  // Replace with your animation state name

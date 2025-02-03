@@ -18,11 +18,12 @@ public class FireballSpawner : MonoBehaviour
     {
         // Instantiate the fireball at the spawn point
         GameObject fireball = Instantiate(fireballPrefab, spawnPoint.position, Quaternion.identity);
-
+        Debug.Log("FireBall Spawner");
         // Set its target position
         StaticFireBalls fireballScript = fireball.GetComponent<StaticFireBalls>();
         if (fireballScript != null)
         {
+            Debug.Log("Fireball Script Not Found Error");
             fireballScript.targetPosition = targetPosition;
             fireballScript.speed = speed;
         }
