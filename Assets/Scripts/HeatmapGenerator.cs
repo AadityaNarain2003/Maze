@@ -13,6 +13,7 @@ public class HeatmapMeshGenerator : MonoBehaviour
     {
         // Initialize heatmap
         heatmap = new float[gridSize, gridSize];
+        Debug.Log("HeatMap Called");
     }
 
     private void Update()

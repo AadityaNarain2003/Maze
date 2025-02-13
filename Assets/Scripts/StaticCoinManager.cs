@@ -26,7 +26,7 @@ public class StaticCoinManager : MonoBehaviour
     // Generate a coin at a specific position
     public void GenerateCoin(Vector3 spawnPosition)
     {
-        Debug.Log("SPW");
+        // Debug.Log("SPW");
         GameObject newCoin = Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
         activeCoins.Add(newCoin);
     }
