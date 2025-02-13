@@ -8,10 +8,13 @@ public class NodeCollisionHandler : MonoBehaviour
 {
     public static event Action<MazeNode> OnNodeInteracted;
     private bool hasLogged = false;
+    private bool hasTriggered=false;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        //this is for Node and player
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && hasTriggered==false)
         {
+            hasTriggered=true;
             //Debug.Log("Player collided with Node: " + gameObject.name);
 
             // Get the MazeNodeComponent from this GameObject
@@ -36,6 +39,7 @@ public class NodeCollisionHandler : MonoBehaviour
     }
      private void OnTriggerExit(Collider other)
     {
+        hasTriggered=false;
         hasLogged=false;
     }
 

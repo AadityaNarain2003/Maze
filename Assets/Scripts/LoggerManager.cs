@@ -10,5 +10,6 @@ public class LoggerManager : MonoBehaviour
     {
         // Initialize the logger with the object to track
         TransformLogger.Initialize(objectToLog);
+        Debug.Log("Logger Manager Called");
     }
 }
