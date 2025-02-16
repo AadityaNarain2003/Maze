@@ -15,7 +15,7 @@ public class NodeCollisionHandler : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") && hasTriggered==false)
         {
             hasTriggered=true;
-            //Debug.Log("Player collided with Node: " + gameObject.name);
+            Debug.Log("Player collided with Node: " + gameObject.name);
 
             // Get the MazeNodeComponent from this GameObject
             MazeNodeComponent nodeComponent = GetComponent<MazeNodeComponent>();
@@ -31,7 +31,7 @@ public class NodeCollisionHandler : MonoBehaviour
                 if(hasLogged==false)
                 {
                     hasLogged=true;
-                    TransformLogger.UpdateLoggerFile(mazeNode);
+                    //TransformLogger.UpdateLoggerFile(mazeNode);
                 }
             }
         }

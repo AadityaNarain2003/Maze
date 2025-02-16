@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     public int Initial_time;
     void Start()
     {
-        player=new Player(gameObject.transform.position,-1);
+        //player=new Player(gameObject.transform.position,-1);
         timer = gameObject.AddComponent<Timer>();
         timer.InitializeTimer(Initial_time); 
     }
@@ -34,9 +34,11 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         // For coins
         if (other.gameObject.layer == LayerMask.NameToLayer("coin"))
-        {
+        {   
+            Debug.Log("Player collided with Coin"); 
             Destroy(other.gameObject);
             timer.AddTime(coin_add); // Add time to the timer
         }
@@ -44,6 +46,7 @@ public class PlayerManager : MonoBehaviour
         // For fireballs
         if (other.gameObject.layer == LayerMask.NameToLayer("fireball"))
         {
+            Debug.Log("Player collided with Fireball"); 
             Destroy(other.gameObject);
             timer.SubtractTime(fire_subtract); // Subtract time from the timer
         }

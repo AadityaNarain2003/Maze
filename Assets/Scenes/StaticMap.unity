@@ -233,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireballPrefab: {fileID: 8458614966707265905, guid: 7b1dd1534dae4d94786161feeaae817d, type: 3}
   spawnPoint: {fileID: 1682649792}
-  targetPosition: {x: -4.32, y: 0.5, z: -4.32}
+  targetTransform: {fileID: 798556785}
   spawnInterval: 2
   speed: 3
 --- !u!4 &448460643
