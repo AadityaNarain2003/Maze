@@ -1,23 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
     // Start is called before the first frame update
     private Player player;
-    public Timer timer;
+    private Timer timer;
 
     public int coin_add;
 
     public int fire_subtract;
 
     public int Initial_time;
+
+    public TextMeshProUGUI timerText;
     void Start()
     {
         //player=new Player(gameObject.transform.position,-1);
         timer = gameObject.AddComponent<Timer>();
         timer.InitializeTimer(Initial_time); 
+        timer.setTMP();
     }
 
     // Update is called once per frame
