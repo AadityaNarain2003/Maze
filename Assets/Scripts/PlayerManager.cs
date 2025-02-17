@@ -51,7 +51,7 @@ public class PlayerManager : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("fireball"))
         {
             Debug.Log("Player collided with Fireball"); 
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             timer.SubtractTime(fire_subtract); // Subtract time from the timer
         }
     }

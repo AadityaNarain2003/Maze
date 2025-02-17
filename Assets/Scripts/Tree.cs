@@ -99,6 +99,10 @@ public class Tree
             {
                 node.nodeobject.SetActive(false);
                 node.nodewallobject.SetActive(false);
+                if(node.fireball!=null)
+                {
+                    node.fireball.SetActive(false);
+                }
                 if(node.leftWall!=null)
                 {
                     node.leftWall.SetActive(false);
@@ -139,6 +143,10 @@ public class Tree
         if(mazeNode.coin!=null)
         {
             mazeNode.coin.SetActive(true);
+        }
+        if(mazeNode.fireball!=null)
+        {
+            mazeNode.fireball.SetActive(true);  
         }
         activeNode.Add(mazeNode);
         

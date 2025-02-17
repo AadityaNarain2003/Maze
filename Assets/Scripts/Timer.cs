@@ -7,6 +7,8 @@ public class Timer : MonoBehaviour
     private float _timeLeft; // Internal variable for time left
     private TextMeshProUGUI timerText; // Reference to the UI Text
 
+    private float totalTime=0;
+
     // Public property to get and set the timer value   
     public float TimeLeft
     {
@@ -64,7 +66,9 @@ public class Timer : MonoBehaviour
         // Check if there's time left
         if (TimeLeft > 0)
         {
-            TimeLeft -= Time.deltaTime; // Reduce time by seconds
+            float a=Time.deltaTime;
+            TimeLeft -= a; // Reduce time by seconds
+            totalTime +=a;
             TimeLeft = Mathf.Max(0, TimeLeft); // Ensure it doesn't go below zero
         }
         UpdateTimerDisplay();
