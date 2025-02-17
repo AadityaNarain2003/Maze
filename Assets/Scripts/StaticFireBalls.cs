@@ -2,20 +2,25 @@ using UnityEngine;
 
 public class StaticFireBalls : MonoBehaviour
 {
-    public Transform targetTransform; // Target as a Transform
-    public float speed = 0f;          // Speed of the fireball
+    public Transform targetTransform; 
+    public Transform startTransform;
+    public float speed = 2f;
+
+    private bool movingToTarget = true;
 
     private void Update()
     {
-        if (targetTransform != null)
+        if (targetTransform != null && startTransform != null)
         {
-            // Move the fireball towards the target's current position
-            transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, speed * Time.deltaTime);
+            Transform destination = movingToTarget ? targetTransform : startTransform;
 
-            // Destroy the fireball when it reaches the target
-            if (Vector3.Distance(transform.position, targetTransform.position) < 0.1f)
+            // Move towards the current destination
+            transform.position = Vector3.MoveTowards(transform.position, destination.position, speed * Time.deltaTime);
+
+            // Switch direction when reaching the destination
+            if (Vector3.Distance(transform.position, destination.position) < 0.1f)
             {
-                Destroy(gameObject);
+                movingToTarget = !movingToTarget;  // Toggle direction
             }
         }
     }

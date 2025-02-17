@@ -50,7 +50,7 @@ public class StaticPlayerManager : MonoBehaviour
         // For fireballs
         if (other.gameObject.layer == LayerMask.NameToLayer("fireball"))
         {
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             timer.SubtractTime(fire_subtract); // Subtract time from the timer
         }
     }

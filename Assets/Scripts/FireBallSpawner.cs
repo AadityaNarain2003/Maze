@@ -10,7 +10,8 @@ public class FireballSpawner : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(SpawnFireball), 0f, spawnInterval);
+        //InvokeRepeating(nameof(SpawnFireball), 0f, spawnInterval);
+        SpawnFireball();
     }
 
     private void SpawnFireball()
@@ -22,6 +23,7 @@ public class FireballSpawner : MonoBehaviour
         StaticFireBalls fireballScript = fireball.GetComponent<StaticFireBalls>();
         if (fireballScript != null && targetTransform != null)
         {
+            fireballScript.startTransform = spawnPoint; 
             fireballScript.targetTransform = targetTransform; // Assigning Transform instead of Vector3
             fireballScript.speed = speed;
         }
