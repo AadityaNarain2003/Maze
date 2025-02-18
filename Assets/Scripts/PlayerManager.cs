@@ -16,8 +16,10 @@ public class PlayerManager : MonoBehaviour
     public int Initial_time;
 
     public TextMeshProUGUI timerText;
+
     void Start()
     {
+        
         //player=new Player(gameObject.transform.position,-1);
         timer = gameObject.AddComponent<Timer>();
         timer.InitializeTimer(Initial_time); 
@@ -42,6 +44,7 @@ public class PlayerManager : MonoBehaviour
         // For coins
         if (other.gameObject.layer == LayerMask.NameToLayer("coin"))
         {   
+            FindObjectOfType<DamageEffect>().TriggerDamageEffect(Color.green);
             Debug.Log("Player collided with Coin"); 
             Destroy(other.gameObject);
             timer.AddTime(coin_add); // Add time to the timer
@@ -52,6 +55,7 @@ public class PlayerManager : MonoBehaviour
         {
             Debug.Log("Player collided with Fireball"); 
             //Destroy(other.gameObject);
+            FindObjectOfType<DamageEffect>().TriggerDamageEffect(Color.red);
             timer.SubtractTime(fire_subtract); // Subtract time from the timer
         }
     }
