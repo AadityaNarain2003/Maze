@@ -80,38 +80,14 @@ public class MazeNode
             // Start the coroutine to animate the coin after it has been instantiated
             coinAnimationHandler.StartCoroutine(coinAnimationHandler.StartCoinAnimation(this.coin));
         }
-        if(isFire && this.Level!=0)
+        if(this.Level%2==0 && isFire && this.Level!=0)
         {
             Vector3 pos=this.Left.Position;
-            Vector3 currpos=this.Position;
-            Vector3 opppos= this.Right.Position;
-            pos.y=0.5F;
-            currpos.y=0.5F;
 
             this.fireball = GameObject.Instantiate(fire, pos, Quaternion.identity);
-            StaticFireBalls fireballScript = fireball.GetComponent<StaticFireBalls>();
-
-            GameObject startObj = new GameObject("StartPoint");
-            startObj.transform.position = pos;
-            GameObject endObj = new GameObject("EndPoint");
-            endObj.transform.position = opppos;
-            if (fireballScript != null )
-            {
-                fireballScript.startTransform = startObj.transform; 
-                fireballScript.targetTransform = endObj.transform; // Assigning Transform instead of Vector3
-                fireballScript.speed = 3;
-            }
-            // Ensure the fireball has a Rigidbody
-            //Rigidbody rb = fireball.GetComponent<Rigidbody>();
-            //if (rb != null)
-            //{
-                //Debug.Log("here");
-                // Calculate direction from 'pos' to 'currpos'
-                //Vector3 dir = (currpos - pos).normalized;
-
-                // Set the velocity to 2 units per second in the calculated direction
-                //rb.velocity = dir * 2f;
-            //}
+            DynamicFireBalls fireballScript = fireball.GetComponent<DynamicFireBalls>();
+            fireballScript.setNode(this);
+            fireballScript.instantizeBallLeft();
         }   
     }
 
@@ -135,40 +111,13 @@ public class MazeNode
             // Start the coroutine to animate the coin after it has been instantiated
             coinAnimationHandler.StartCoroutine(coinAnimationHandler.StartCoinAnimation(this.coin));
         }
-        if(isFire && this.Level!=0)
+        if(this.Level%2==0 && isFire && this.Level!=0)
         {
             Vector3 pos=this.Right.Position;
-            Vector3 currpos=this.Position;
-            Vector3 opppos= this.Left.Position; 
-            pos.y=0.5F;
-            currpos.y=0.5F;
-
             this.fireball = GameObject.Instantiate(fire, pos, Quaternion.identity);
-
-            StaticFireBalls fireballScript = fireball.GetComponent<StaticFireBalls>();
-
-            GameObject startObj = new GameObject("StartPoint");
-            startObj.transform.position = pos;
-            GameObject endObj = new GameObject("EndPoint");
-            endObj.transform.position = opppos;
-            if (fireballScript != null )
-            {
-                fireballScript.startTransform = startObj.transform; 
-                fireballScript.targetTransform = endObj.transform; // Assigning Transform instead of Vector3
-                fireballScript.speed = 3;
-            }
-            // Ensure the fireball has a Rigidbody
-            /*Rigidbody rb = fireball.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                Debug.Log("here");
-                // Calculate direction from 'pos' to 'currpos'
-                Vector3 dir = (currpos - pos).normalized;
-
-                // Set the velocity to 2 units per second in the calculated direction
-                //rb.velocity = dir * 0.75f;
-            }*/
-
+            DynamicFireBalls fireballScript = fireball.GetComponent<DynamicFireBalls>();
+            fireballScript.setNode(this);
+            fireballScript.instantizeBallRight();
         }
     }
 }

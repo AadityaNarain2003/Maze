@@ -49,7 +49,7 @@ public class MazeGenerator : MonoBehaviour
         gameTree.fixActiveMap(mazeNode);
         if(mazeNode.Left==null && mazeNode.Right==null)
         {
-            float[] possibleDistances = new float[] {  1.5f, 2f, 2.5f, 3f, 3.5f, 4f };
+            float[] possibleDistances = new float[] {  2f, 3f, 4f };
 
             // Randomly select distance values for the left and right child creation
             float randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];

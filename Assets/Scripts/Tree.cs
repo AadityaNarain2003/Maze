@@ -162,6 +162,10 @@ public class Tree
             {
                 mazeNode.Parent.coin.SetActive(true);
             }
+            if(mazeNode.Parent.fireball!=null)
+            {
+                mazeNode.Parent.fireball.SetActive(true);
+            }
             activeNode.Add(mazeNode.Parent);
         }   
 
