@@ -44,19 +44,46 @@ public class MazeGenerator : MonoBehaviour
     // Method to handle node interactions
     private void HandleNodeInteraction(MazeNode mazeNode)
     {
-        //Debug.Log($"MazeGenerator received node interaction. Position: {mazeNode.Position}, Level: {mazeNode.Level}");
+        Debug.Log($"MazeGenerator received node interaction. Position: {mazeNode.Position}, Level: {mazeNode.Level}");
         gameTree.currentNode = mazeNode;
         gameTree.fixActiveMap(mazeNode);
+        float[] possibleDistances = new float[] {  2f, 3f, 4f };
+
+        // Randomly select distance values for the left and right child creation
+        float randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
+        float randomRightDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
+
         if(mazeNode.Left==null && mazeNode.Right==null)
         {
-            float[] possibleDistances = new float[] {  2f, 3f, 4f };
-
-            // Randomly select distance values for the left and right child creation
-            float randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
-            float randomRightDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
-
+            
             // Create children with the random distances
-            gameTree.createChildren(mazeNode, (int)randomLeftDistance,(int) randomRightDistance);
+            if(mazeNode.Level==0)
+            {
+                Debug.Log("IN IF Case");
+                gameTree.createChildrenRoot(mazeNode, (int)randomLeftDistance,(int) randomRightDistance,0);
+            }
+            
+        }
+        else
+        {
+            if( mazeNode.Left.Left==null && mazeNode.Right.Left==null && mazeNode.Left.Right==null && mazeNode.Right.Right==null )
+            {
+                if(mazeNode.Level!=0)
+                {
+                    Debug.Log("IN ELSE CASE");
+                    possibleDistances = new float[] {  2f, 3f, 4f };
+
+                    randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
+                    randomRightDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
+
+                    gameTree.createChildren(mazeNode.Left, (int)randomLeftDistance,(int) randomRightDistance);
+
+                    randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
+                    randomRightDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
+
+                    gameTree.createChildren(mazeNode.Right, (int)randomLeftDistance,(int) randomRightDistance);
+                }
+            }
         }
     }
 }
