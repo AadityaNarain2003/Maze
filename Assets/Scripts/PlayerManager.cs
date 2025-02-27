@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     {
         
         //player=new Player(gameObject.transform.position,-1);
-        timer = gameObject.AddComponent<Timer>();
+        timer = gameObject.GetComponent<Timer>();
         timer.InitializeTimer(Initial_time); 
         timer.setTMP();
     }
