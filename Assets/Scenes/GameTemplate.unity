@@ -497,9 +497,6 @@ GameObject:
   - component: {fileID: 527739144}
   - component: {fileID: 527739145}
   - component: {fileID: 527739146}
-  - component: {fileID: 527739149}
-  - component: {fileID: 527739148}
-  - component: {fileID: 527739147}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -552,58 +549,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToLog: {fileID: 839833540}
---- !u!114 &527739147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527739143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3cd36a92c0fc0044aafd1c329690d34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coin_add: 15
-  Initial_time: 90
-  coinManager: {fileID: 527739148}
-  timerText: {fileID: 0}
---- !u!114 &527739148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527739143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52f41462d0bbeab498fc17505e60385b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 8949798038917887321, guid: 7dac7b20eda351d458b21f57b61b978a, type: 3}
-  spawnPositions: []
-  coinGenerationDelay: 2
-  playerManager: {fileID: 527739147}
-  initialCoinCount: 5
---- !u!114 &527739149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527739143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4f067d1673797d41b794631dd81ada6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballPrefab: {fileID: 8458614966707265905, guid: 7b1dd1534dae4d94786161feeaae817d, type: 3}
-  startTransforms: []
-  targetTransforms: []
-  speed: 2
-  respawnDelay: 5
-  fire_subtract: 30
-  playerManager: {fileID: 527739147}
 --- !u!1 &692657520
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,9 +1002,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90266dc958b32614aa57f197ea68cde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coin_add: 15
-  fire_subtract: 30
-  Initial_time: 90
+  coin_add: 0
+  fire_subtract: 0
+  Initial_time: 0
   timerText: {fileID: 0}
 --- !u!114 &839833546
 MonoBehaviour:
