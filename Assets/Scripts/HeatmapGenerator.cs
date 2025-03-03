@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 
 public class HeatmapMeshGenerator : MonoBehaviour
@@ -7,38 +8,17 @@ public class HeatmapMeshGenerator : MonoBehaviour
     private float[,] heatmap; // Heatmap matrix
 
     public GameObject player; // Reference to the player object
-    public Material heatmapMaterial; // Material to apply to the heatmap mesh
-
-    private MeshFilter meshFilter;
-    private MeshRenderer meshRenderer;
-    private Mesh heatmapMesh;
-    public float xOffset = 20f; // Offset to move the heatmap to the right
 
     private void Start()
     {
         // Initialize heatmap
         heatmap = new float[gridSize, gridSize];
-
-        // Create a GameObject to hold the heatmap mesh
-        GameObject heatmapObject = new GameObject("HeatmapMesh");
-        meshFilter = heatmapObject.AddComponent<MeshFilter>();
-        meshRenderer = heatmapObject.AddComponent<MeshRenderer>();
-
-        // Assign the material
-        meshRenderer.material = heatmapMaterial;
-
-        // Generate initial mesh
-        heatmapMesh = GenerateMeshFromHeatmap();
-        meshFilter.mesh = heatmapMesh;
-
-        // Move the heatmap to the right
-        heatmapObject.transform.position = new Vector3(xOffset, 0, 0);
     }
 
     private void Update()
     {
         UpdateHeatmap();
-        UpdateMesh();
+        GenerateMeshAndSave();
     }
 
     void UpdateHeatmap()
@@ -54,28 +34,24 @@ public class HeatmapMeshGenerator : MonoBehaviour
         heatmap[gridX, gridZ] += Time.deltaTime;
     }
 
-    public void UpdateMesh()
+    public void GenerateMeshAndSave()
     {
         // Create a mesh from the heatmap
-        heatmapMesh = GenerateMeshFromHeatmap();
-        meshFilter.mesh = heatmapMesh;
+        Mesh heatmapMesh = GenerateMeshFromHeatmap();
+
+        // Save the mesh to a file
+        SaveMeshToFile(heatmapMesh, "HeatmapMesh.obj");
     }
 
     Mesh GenerateMeshFromHeatmap()
     {
-        if (heatmapMesh == null)
-        {
-            heatmapMesh = new Mesh();
-        }
-        else
-        {
-            heatmapMesh.Clear();
-        }
+        Mesh mesh = new Mesh();
 
         int verticesCount = gridSize * gridSize;
         Vector3[] vertices = new Vector3[verticesCount];
         int[] triangles = new int[(gridSize - 1) * (gridSize - 1) * 6];
-        Color[] colors = new Color[verticesCount];
+        Vector2[] uvs = new Vector2[verticesCount];
+
         int vertexIndex = 0;
         int triangleIndex = 0;
 
@@ -86,11 +62,7 @@ public class HeatmapMeshGenerator : MonoBehaviour
                 // Generate vertex position and UV
                 float height = heatmap[x, z]; // Use heatmap value as height
                 vertices[vertexIndex] = new Vector3(x * cellSize, height, z * cellSize);
-
-                // Generate vertex color
-                float normalizedHeight = Mathf.Clamp01(height / 5f); // Normalize height for color mapping
-                // Modified line:
-                colors[vertexIndex] = Color.Lerp(Color.white, Color.red, normalizedHeight);
+                uvs[vertexIndex] = new Vector2((float)x / gridSize, (float)z / gridSize);
 
                 // Generate triangles
                 if (x < gridSize - 1 && z < gridSize - 1)
@@ -114,11 +86,46 @@ public class HeatmapMeshGenerator : MonoBehaviour
             }
         }
 
-        heatmapMesh.vertices = vertices;
-        heatmapMesh.triangles = triangles;
-        heatmapMesh.colors = colors;
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.uv = uvs;
 
-        heatmapMesh.RecalculateNormals();
-        return heatmapMesh;
+        mesh.RecalculateNormals();
+        return mesh;
+    }
+
+    void SaveMeshToFile(Mesh mesh, string fileName)
+    {
+        string filePath = Path.Combine(Application.dataPath, fileName);
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            // Write vertices
+            foreach (Vector3 vertex in mesh.vertices)
+            {
+                writer.WriteLine($"v {vertex.x} {vertex.y} {vertex.z}");
+            }
+
+            // Write UVs
+            foreach (Vector2 uv in mesh.uv)
+            {
+                writer.WriteLine($"vt {uv.x} {uv.y}");
+            }
+
+            // Write normals
+            foreach (Vector3 normal in mesh.normals)
+            {
+                writer.WriteLine($"vn {normal.x} {normal.y} {normal.z}");
+            }
+
+            // Write faces (1-based indexing for .obj files)
+            for (int i = 0; i < mesh.triangles.Length; i += 3)
+            {
+                writer.WriteLine($"f {mesh.triangles[i] + 1}/{mesh.triangles[i] + 1}/{mesh.triangles[i] + 1} " +
+                                 $"{mesh.triangles[i + 1] + 1}/{mesh.triangles[i + 1] + 1}/{mesh.triangles[i + 1] + 1} " +
+                                 $"{mesh.triangles[i + 2] + 1}/{mesh.triangles[i + 2] + 1}/{mesh.triangles[i + 2] + 1}");
+            }
+        }
+
+        Debug.Log($"Mesh saved to {fileName}");
     }
 }

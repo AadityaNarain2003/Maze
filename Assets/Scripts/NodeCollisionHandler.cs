@@ -31,7 +31,7 @@ public class NodeCollisionHandler : MonoBehaviour
                 if(hasLogged==false)
                 {
                     hasLogged=true;
-                    TransformLogger.UpdateLoggerFile(mazeNode);
+                    //TransformLogger.UpdateLoggerFile(mazeNode);
                 }
             }
         }

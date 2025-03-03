@@ -34,10 +34,10 @@ public class StaticPlayerManager : MonoBehaviour
 
     void Update()
     {
-        if (timer.TimeLeft <= 0)
-        {
+        //if (timer.TimeLeft <= 0)
+        //{
             // Game over logic...
-        }
+        //}
     }
 
     // Public methods to add and subtract time

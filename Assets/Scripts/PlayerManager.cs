@@ -32,10 +32,10 @@ public class PlayerManager : MonoBehaviour
         //Debug.Log($"Time Left: {timer.TimeLeft}");
 
         // Check if time has run out
-        if (timer.TimeLeft <= 0)
-        {
+        //if (timer.TimeLeft <= 0)
+        //{
            // Debug.Log("Time's up!");
-        }
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
