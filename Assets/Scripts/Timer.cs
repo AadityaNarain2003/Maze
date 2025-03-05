@@ -172,8 +172,13 @@ public class Timer : MonoBehaviour
         }
     }
 
+    private void OnTransformParentChanged()
+    {
+        Debug.LogWarning($"A star's parent has changed! Current parent: {transform.parent.name}");
+    }
     private void UpdateHealthBar()
     {
+        Debug.Log("stars container is: "+starsContainer);
         if (healthBar==null)
         {
             return;
@@ -187,13 +192,19 @@ public class Timer : MonoBehaviour
 
         // Determine how many stars should be filled.
         int filledStars = Mathf.FloorToInt(totalTime / timerBar);
-
+        Debug.Log("Filled Stars: "+filledStars);
         //Update stars colors based on number of filled stars
         if (starsContainer!=null)
         {
+            Debug.Log(" total children: "+starsContainer.childCount);
+            Debug.Log("stars container is: "+starsContainer);
             for (int i = 0; i < starsContainer.childCount; i++)
             {
                 Image starImage = starsContainer.GetChild(i).GetComponent<Image>();
+                Debug.Log("Star Changed");  
+                Debug.Log("Colour of star "+i+" is "+(i < filledStars ? Color.yellow : Color.gray));
+                Debug.Log("Filled Stars: "+filledStars);
+
                 starImage.color = i < filledStars ? Color.yellow : Color.gray;
             }
         }

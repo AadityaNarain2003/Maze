@@ -86,6 +86,7 @@ public class StaticFireballManager : MonoBehaviour
     {
         if (activeFireballs.ContainsKey(fireball))
         {
+            Debug.Log("Fireball collision detected inside staticFireManager!");
             Tuple<Transform, Transform> data = activeFireballs[fireball];
             activeFireballs.Remove(fireball);
             fireballDirection.Remove(fireball);

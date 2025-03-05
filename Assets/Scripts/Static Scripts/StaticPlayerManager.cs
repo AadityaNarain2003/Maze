@@ -43,11 +43,13 @@ public class StaticPlayerManager : MonoBehaviour
     // Public methods to add and subtract time
     public void AddTime(int timeToAdd)
     {
+        Debug.Log("add time called inside static player manager");
         timer.AddTime(timeToAdd);
     }
 
     public void SubtractTime(int timeToSubtract)
     {
+        Debug.Log("subtract time called inside static player manager");
         timer.SubtractTime(timeToSubtract);
     }
 }

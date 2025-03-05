@@ -42,6 +42,7 @@ public class StaticCoinManager : MonoBehaviour
         // Remove the coin from the list and destroy it
         if (activeCoins.ContainsKey(coin))
         {
+            Debug.Log("Coin collision detected inside staticCoinManager!");
             Transform position = activeCoins[coin]; //Get the initial transform
             activeCoins.Remove(coin);
             Destroy(coin);
