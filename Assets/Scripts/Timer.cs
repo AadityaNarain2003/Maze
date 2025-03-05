@@ -27,6 +27,11 @@ public class Timer : MonoBehaviour
         }
     }
 
+    // Public Property to access total time.
+    public float TotalTime
+    {
+        get { return totalTime; }
+    }
     // Constructor-like method to initialize the timer (game timer)
     public void InitializeTimer(float startTime)
     {
@@ -100,7 +105,6 @@ public class Timer : MonoBehaviour
     void Start()
     {
         totalStars = Mathf.FloorToInt(timerMax / timerBar); // Calculate total number of stars based on max time and bar time.
-        Debug.Log($"Total stars: {totalStars}");
         CreateStars();
     }
 
@@ -178,7 +182,6 @@ public class Timer : MonoBehaviour
     }
     private void UpdateHealthBar()
     {
-        Debug.Log("stars container is: "+starsContainer);
         if (healthBar==null)
         {
             return;
@@ -192,19 +195,13 @@ public class Timer : MonoBehaviour
 
         // Determine how many stars should be filled.
         int filledStars = Mathf.FloorToInt(totalTime / timerBar);
-        Debug.Log("Filled Stars: "+filledStars);
+
         //Update stars colors based on number of filled stars
         if (starsContainer!=null)
         {
-            Debug.Log(" total children: "+starsContainer.childCount);
-            Debug.Log("stars container is: "+starsContainer);
             for (int i = 0; i < starsContainer.childCount; i++)
             {
                 Image starImage = starsContainer.GetChild(i).GetComponent<Image>();
-                Debug.Log("Star Changed");  
-                Debug.Log("Colour of star "+i+" is "+(i < filledStars ? Color.yellow : Color.gray));
-                Debug.Log("Filled Stars: "+filledStars);
-
                 starImage.color = i < filledStars ? Color.yellow : Color.gray;
             }
         }
