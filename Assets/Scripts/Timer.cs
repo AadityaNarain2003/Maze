@@ -43,10 +43,11 @@ public class Timer : MonoBehaviour
         yield return new WaitForSeconds(1.0f); // Wait for 1 second before checking
 
         int leftControllerLayer = LayerMask.NameToLayer("LeftController");
+        int rightControllerLayer = LayerMask.NameToLayer("RightController");
 
-        if (leftControllerLayer == -1)
+        if (leftControllerLayer == -1 || rightControllerLayer == -1)
         {
-            Debug.LogError("Layer 'Left Controller' not found! Make sure it exists in the Layers settings.");
+            Debug.LogError("Layer 'Left Controller' or 'Right Controller' not found! Make sure they exist in the Layers settings.");
             yield break;
         }
 
@@ -57,13 +58,42 @@ public class Timer : MonoBehaviour
             if (obj.layer == leftControllerLayer)
             {
                 timerText = obj.GetComponentInChildren<TextMeshProUGUI>();
-                if (timerText != null) break;
+                if (timerText != null)
+                {
+                  
+                }
+            }
+            if (obj.layer == rightControllerLayer)
+            {
+              
+                foreach (Image img in obj.GetComponentsInChildren<Image>(true))
+                {
+                    if (img.name == "HealthBar")
+                    {
+                        healthBar=img;
+                    }
+                }
+                foreach (Transform tr in obj.GetComponentsInChildren<Transform>(true))
+                {
+                    if (tr.name == "StarsContainer")
+                    {
+                        starsContainer=tr;
+                    }
+                }
             }
         }
 
         if (timerText == null)
         {
             Debug.LogError("TextMeshProUGUI not found in Left Controller!");
+        }
+        if (healthBar == null)
+        {
+            Debug.LogError("HealthBar not found in Right Controller!");
+        }
+        if (starsContainer == null)
+        {
+            Debug.LogError("StarsContainer not found in Right Controller!");
         }
     }
 
@@ -76,16 +106,43 @@ public class Timer : MonoBehaviour
 
     private void CreateStars()
     {
+        if (starsContainer == null)
+        {
+            Debug.LogError("StarsContainer is null. Cannot create stars.");
+            return;
+        }
         for (int i = 0; i < totalStars; i++)
         {
-            Instantiate(starPrefab, starsContainer);
+            // Instantiate the star as a child of the starsContainer.
+            GameObject newStar = Instantiate(starPrefab, starsContainer);
+
+            // Get the RectTransform
+            RectTransform starRectTransform = newStar.GetComponent<RectTransform>();
+            if (starRectTransform != null)
+            {
+                // Set the anchor presets to middle-left
+                starRectTransform.anchorMin = new Vector2(0, 0.5f);
+                starRectTransform.anchorMax = new Vector2(0, 0.5f);
+
+                // Set the pivot to the left
+                starRectTransform.pivot = new Vector2(0, 0.5f);
+
+                // Reset the local position and scale
+                starRectTransform.localPosition = Vector3.zero;
+                starRectTransform.localScale = Vector3.one;
+                starRectTransform.localRotation = Quaternion.identity;
+            }
+            else
+            {
+                Debug.LogError("Missing RectTransform component on star prefab!");
+            }
         }
     }
 
     private void Update()
     {
         // Check if there's time left in the game
-        if (TimeLeft > 0 && totalTime<timerMax)
+        if (TimeLeft > 0 && totalTime < timerMax)
         {
             float a = Time.deltaTime;
             TimeLeft -= a; // Reduce game time by delta time
@@ -117,6 +174,10 @@ public class Timer : MonoBehaviour
 
     private void UpdateHealthBar()
     {
+        if (healthBar==null)
+        {
+            return;
+        }
         // Calculate the time spent in the current "timerBar"
         float currentBarTime = totalTime % timerBar;
 
@@ -128,10 +189,14 @@ public class Timer : MonoBehaviour
         int filledStars = Mathf.FloorToInt(totalTime / timerBar);
 
         //Update stars colors based on number of filled stars
-        for (int i = 0; i < starsContainer.childCount; i++)
+        if (starsContainer!=null)
         {
-            Image starImage = starsContainer.GetChild(i).GetComponent<Image>();
-            starImage.color = i < filledStars ? Color.yellow : Color.gray;
+            for (int i = 0; i < starsContainer.childCount; i++)
+            {
+                Image starImage = starsContainer.GetChild(i).GetComponent<Image>();
+                starImage.color = i < filledStars ? Color.yellow : Color.gray;
+            }
         }
+        
     }
 }
