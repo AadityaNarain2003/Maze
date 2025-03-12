@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     {
         
         //player=new Player(gameObject.transform.position,-1);
-        timer = gameObject.GetComponent<Timer>();
+        timer = gameObject.GetComponentInParent<Timer>();
         timer.InitializeTimer(Initial_time); 
         timer.setTMP();
     }
@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        Debug.Log("wow " + other.gameObject.name);
         // For coins
         if (other.gameObject.layer == LayerMask.NameToLayer("coin"))
         {   

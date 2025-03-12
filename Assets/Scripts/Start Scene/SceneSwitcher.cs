@@ -1,17 +1,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public void LoadStaticScene()
-    {
-        SceneManager.LoadScene("StaticMap");
-    }
+    public InputActionProperty xButtonAction; // For X button
+    public InputActionProperty yButtonAction; // For Y button
 
-    public void LoadDynamicScene()
+    void Update()
     {
-        SceneManager.LoadScene("Game Template");
+        if (xButtonAction.action.WasPressedThisFrame())
+        {
+            SceneManager.LoadScene("GameTemplate");
+        }
+
+        if (yButtonAction.action.WasPressedThisFrame())
+        {
+            SceneManager.LoadScene("StaticMap");
+        }
     }
 }

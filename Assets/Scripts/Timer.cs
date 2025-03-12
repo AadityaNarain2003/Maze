@@ -2,10 +2,13 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
 
 public class Timer : MonoBehaviour
 {
-    private float _timeLeft; // Internal variable for time left (this is the game timer)
+    public string dataToSend = "Hello from Scene 1!";
+    private float _timeLeft=120; // Internal variable for time left (this is the game timer)
     private TextMeshProUGUI timerText; // Reference to the UI Text
 
     private float totalTime = 0; // Total time spent in the game
@@ -153,8 +156,19 @@ public class Timer : MonoBehaviour
             totalTime += a; // increase the total time.
             TimeLeft = Mathf.Max(0, TimeLeft); // Ensure it doesn't go below zero
         }
+        CheckandSwitchScene();
         UpdateTimerDisplay();
         UpdateHealthBar();
+    }
+
+    public void CheckandSwitchScene()
+    {
+        if(TimeLeft<=0)
+        {
+             PlayerPrefs.SetString("TotalTime", totalTime.ToString());
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("End Scene");
+        }
     }
 
     public void AddTime(float time)
