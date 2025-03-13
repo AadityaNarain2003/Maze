@@ -148,4 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
   startTransform: {fileID: 0}
-  speed: 2
+  speed: 0.1

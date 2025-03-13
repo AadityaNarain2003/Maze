@@ -27,21 +27,25 @@ public class StaticFireballManager : MonoBehaviour
 
     void InitializeFireballs()
     {
-        foreach (Transform childTransform in fireballContainer.GetComponentsInChildren<Transform>())
+        // Get the Transform component of the fireballContainer
+        Transform containerTransform = fireballContainer.transform;
+
+        // Iterate over the direct children of the container's Transform
+        foreach (Transform childTransform in containerTransform) 
         {
             Debug.Log("Checking child: " + childTransform.name);
-            //Ignore the parent
-            if (childTransform == fireballContainer.transform) continue;
             Transform startTransform = null;
             Transform targetTransform = null;
-            foreach (Transform grandChildTransform in childTransform.GetComponentsInChildren<Transform>())
+
+            // Iterate over the direct children of the current childTransform
+            foreach (Transform grandChildTransform in childTransform)
             {
-                Debug.Log("Checking grandchild: " + grandChildTransform.name);
-                if (grandChildTransform.name.Contains("s")) // Changed to "s"
+                Debug.Log("Checking GrandChild: " + grandChildTransform.name);
+                if (grandChildTransform.name.Contains("s"))
                 {
                     startTransform = grandChildTransform;
                 }
-                else if (grandChildTransform.name.Contains("t")) // Changed to "t"
+                else if (grandChildTransform.name.Contains("t"))
                 {
                     targetTransform = grandChildTransform;
                 }
@@ -60,6 +64,7 @@ public class StaticFireballManager : MonoBehaviour
             fireballDirection.Add(fireball, true);
         }
     }
+
 
     void Update()
     {

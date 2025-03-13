@@ -4,7 +4,7 @@ public class DynamicFireBalls : MonoBehaviour
 {
     public Transform targetTransform; 
     public Transform startTransform;
-    public float speed = 2f;
+    public float speed = 0.5F;
 
     private bool movingToTarget = true;
 
@@ -23,8 +23,7 @@ public class DynamicFireBalls : MonoBehaviour
             endObj.transform.position = opppos;
             
             startTransform = startObj.transform; 
-            targetTransform = endObj.transform; 
-            speed = 3;       
+            targetTransform = endObj.transform;   
     }
 
     public void instantizeBallRight()
@@ -41,7 +40,6 @@ public class DynamicFireBalls : MonoBehaviour
             
             startTransform = startObj.transform; 
             targetTransform = endObj.transform; 
-            speed = 3;       
     }
 
     public void setNode(MazeNode mazeNode)
