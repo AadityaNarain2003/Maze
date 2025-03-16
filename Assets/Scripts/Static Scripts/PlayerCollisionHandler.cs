@@ -4,16 +4,16 @@ public class PlayerCollisionHandler : MonoBehaviour
 {
     private StaticCoinManager coinManager;
     private StaticFireballManager fireballManager;
-    public Transform cameraTransform; // Reference to the headset
-    private Vector3 previousCameraPosition;
+    // public Transform cameraTransform; // Reference to the headset
+    // private Vector3 previousCameraPosition;
 
     void Start()
     {
-        if (cameraTransform == null)
-        {
-            cameraTransform = Camera.main.transform; // Automatically find the VR headset
-        }
-        previousCameraPosition = cameraTransform.position;
+        // if (cameraTransform == null)
+        // {
+        //     cameraTransform = Camera.main.transform; // Automatically find the VR headset
+        // }
+        // previousCameraPosition = cameraTransform.position;
 
         Debug.Log("PlayerCollisionHandler Start");
         // Find the Manager GameObject in the scene.
@@ -40,17 +40,17 @@ public class PlayerCollisionHandler : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        Vector3 headsetMovement = cameraTransform.position - previousCameraPosition;
-        headsetMovement.y = 0;  // Prevent extra vertical movement
+    // void Update()
+    // {
+    //     Vector3 headsetMovement = cameraTransform.position - previousCameraPosition;
+    //     headsetMovement.y = 0;  // Prevent extra vertical movement
 
-        // Apply the movement to PlayerTest
-        transform.position += headsetMovement;
+    //     // Apply the movement to PlayerTest
+    //     transform.position += headsetMovement;
 
-        // Update the previous position
-        previousCameraPosition = cameraTransform.position;
-    }
+    //     // Update the previous position
+    //     previousCameraPosition = cameraTransform.position;
+    // }
 
 
 
