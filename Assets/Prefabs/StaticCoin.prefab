@@ -76,7 +76,7 @@ PrefabInstance:
       addedObject: {fileID: -444391330637158526}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 926b8f1f813e4ff4e8adf38dca235494, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -5248714790928472885}
+      addedObject: {fileID: -2141318846414227219}
   m_SourcePrefab: {fileID: 100100000, guid: 926b8f1f813e4ff4e8adf38dca235494, type: 3}
 --- !u!1 &8949798038917887321 stripped
 GameObject:
@@ -125,16 +125,30 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.0000002
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-5248714790928472885
-MonoBehaviour:
+--- !u!54 &-2141318846414227219
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8949798038917887321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b2a89e627706e240ba43b7023eede75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinManager: {fileID: 0}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Puru
-  productName: Full Version 1
+  productName: Final Version
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -141,7 +141,10 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: -3342145345138106239, guid: 952dbece7832ccd429c80699d518fde3, type: 2}
+  - {fileID: 11400000, guid: 2e9d89cf311c71b47aca4357b1c7f907, type: 2}
+  - {fileID: 755088362349874756, guid: c32ae365218aca2419cad52007a7d504, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -162,7 +165,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.Puru.FullVersion1
+    Android: com.Puru.FinalVersion
   buildNumber:
     Standalone: 0
     VisionOS: 0

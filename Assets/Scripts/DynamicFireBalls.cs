@@ -4,7 +4,7 @@ public class DynamicFireBalls : MonoBehaviour
 {
     public Transform targetTransform; 
     public Transform startTransform;
-    public float speed = 0.5F;
+    public float speed = 1.0F;
 
     private bool movingToTarget = true;
 

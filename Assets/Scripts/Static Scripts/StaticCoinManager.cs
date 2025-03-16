@@ -31,8 +31,8 @@ public class StaticCoinManager : MonoBehaviour
     public void GenerateCoin(Transform spawnTransform) // Now takes a Transform
     {
         GameObject coin = Instantiate(coinPrefab, spawnTransform.position, spawnTransform.rotation); //Use transform properties
-        CoinCollider coinCollider = coin.GetComponent<CoinCollider>();
-        coinCollider.coinManager = this;
+        // CoinCollider coinCollider = coin.GetComponent<CoinCollider>();
+        // coinCollider.coinManager = this;
         activeCoins.Add(coin, spawnTransform); //Save the initial transform
     }
 

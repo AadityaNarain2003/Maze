@@ -33,14 +33,14 @@ public class StaticFireballManager : MonoBehaviour
         // Iterate over the direct children of the container's Transform
         foreach (Transform childTransform in containerTransform) 
         {
-            Debug.Log("Checking child: " + childTransform.name);
+            // Debug.Log("Checking child: " + childTransform.name);
             Transform startTransform = null;
             Transform targetTransform = null;
 
             // Iterate over the direct children of the current childTransform
             foreach (Transform grandChildTransform in childTransform)
             {
-                Debug.Log("Checking GrandChild: " + grandChildTransform.name);
+                // Debug.Log("Checking GrandChild: " + grandChildTransform.name);
                 if (grandChildTransform.name.Contains("s"))
                 {
                     startTransform = grandChildTransform;
@@ -58,8 +58,8 @@ public class StaticFireballManager : MonoBehaviour
             }
 
             GameObject fireball = Instantiate(fireballPrefab, startTransform.position, Quaternion.identity);
-            FireballCollider fireballCollider = fireball.AddComponent<FireballCollider>();
-            fireballCollider.fireballManager = this;
+            // FireballCollider fireballCollider = fireball.AddComponent<FireballCollider>();
+            // fireballCollider.fireballManager = this;
             activeFireballs.Add(fireball, new Tuple<Transform, Transform>(startTransform, targetTransform));
             fireballDirection.Add(fireball, true);
         }
@@ -106,8 +106,8 @@ public class StaticFireballManager : MonoBehaviour
         yield return new WaitForSeconds(respawnDelay);
 
         GameObject newFireball = Instantiate(fireballPrefab, data.Item1.position, Quaternion.identity);
-        FireballCollider fireballCollider = newFireball.AddComponent<FireballCollider>();
-        fireballCollider.fireballManager = this;
+        // FireballCollider fireballCollider = newFireball.AddComponent<FireballCollider>();
+        // fireballCollider.fireballManager = this;
         activeFireballs.Add(newFireball, data);
         fireballDirection.Add(newFireball, true);
     }

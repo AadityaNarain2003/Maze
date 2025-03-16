@@ -31,7 +31,8 @@ public class EndSceneSwitcher : MonoBehaviour
         if (timer != null)
         {
             // Save the total time in PlayerPrefs.
-            PlayerPrefs.SetFloat("TotalTime", timer.TotalTime);
+            PlayerPrefs.SetString("TotalTime", timer.TotalTime.ToString());
+            PlayerPrefs.Save();
             Debug.Log($"EndSceneSwitcher: Saved total time: {timer.TotalTime} to PlayerPrefs.");
         }
         else
