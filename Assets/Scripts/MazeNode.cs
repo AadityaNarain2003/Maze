@@ -69,7 +69,7 @@ public class MazeNode
 
         if (isCoin)
         {
-            position.y = 0.75F;
+            position.y = 1.5F;
             isCoinPresent = true;
             this.coin = GameObject.Instantiate(coin, position, Quaternion.identity);
 
@@ -101,7 +101,7 @@ public class MazeNode
         if (isCoin)
         {
             isCoinPresent = true;
-            position.y = 0.75F;
+            position.y = 1.5F;
             this.coin = GameObject.Instantiate(coin, position, Quaternion.identity);
 
             // Create a GameObject for the CoinAnimationHandler and add the handler to it

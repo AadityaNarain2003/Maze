@@ -6,7 +6,7 @@ using TMPro;
 public class StaticPlayerManager : MonoBehaviour
 {
     private Player player;
-    private Timer timer; // Keep it private
+    // private Timer timer; // Keep it private
 
     public int coin_add;
     public int Initial_time;
@@ -14,6 +14,7 @@ public class StaticPlayerManager : MonoBehaviour
     public StaticCoinManager coinManager;
 
     public TextMeshProUGUI timerText;
+    public static Timer staticTimer;
 
     void Start()
     {
@@ -22,19 +23,34 @@ public class StaticPlayerManager : MonoBehaviour
             Debug.LogError("CoinManager is not assigned in StaticPlayerManager.");
         }
 
-        timer = GetComponent<Timer>();
-        if (timer == null)
+        // timer = GetComponent<Timer>();
+        // if (timer == null)
+        // {
+        //     Debug.LogError("Timer component not found on StaticPlayerManager");
+        // }
+
+        // timer.InitializeTimer(Initial_time);
+        // timer.setTMP();
+            GameObject timerObject = GameObject.Find("PlayerTest for static"); // Find the TimerObject
+        if (timerObject == null)
         {
-            Debug.LogError("Timer component not found on StaticPlayerManager");
+            Debug.LogError("TimerObject not found in the scene.");
+            return;
         }
 
-        timer.InitializeTimer(Initial_time);
-        timer.setTMP();
+        staticTimer = timerObject.GetComponent<Timer>();
+        if (staticTimer == null)
+        {
+            Debug.LogError("Timer component not found on TimerObject.");
+            return;
+        }
+        staticTimer.InitializeTimer(Initial_time);
+        staticTimer.setTMP();
     }
 
     void Update()
     {
-        if (timer.TimeLeft <= 0)
+        if (staticTimer.TimeLeft <= 0)
         {
             // Game over logic...
         }
@@ -44,12 +60,12 @@ public class StaticPlayerManager : MonoBehaviour
     public void AddTime(int timeToAdd)
     {
         Debug.Log("add time called inside static player manager");
-        timer.AddTime(timeToAdd);
+        staticTimer.AddTime(timeToAdd);
     }
 
     public void SubtractTime(int timeToSubtract)
     {
         Debug.Log("subtract time called inside static player manager");
-        timer.SubtractTime(timeToSubtract);
+        staticTimer.SubtractTime(timeToSubtract);
     }
 }
