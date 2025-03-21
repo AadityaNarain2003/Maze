@@ -181,6 +181,18 @@ PrefabInstance:
       value: FireballTransforms
       objectReference: {fileID: 0}
     - target: {fileID: 4301683276412806811, guid: 292aa70632a1ffa44b74794ef5730ccc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301683276412806811, guid: 292aa70632a1ffa44b74794ef5730ccc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301683276412806811, guid: 292aa70632a1ffa44b74794ef5730ccc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301683276412806811, guid: 292aa70632a1ffa44b74794ef5730ccc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -190,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4301683276412806811, guid: 292aa70632a1ffa44b74794ef5730ccc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4301683276412806811, guid: 292aa70632a1ffa44b74794ef5730ccc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -221,7 +233,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1803084599204886980, guid: 292aa70632a1ffa44b74794ef5730ccc, type: 3}
+    - {fileID: 4756693337176587852, guid: 292aa70632a1ffa44b74794ef5730ccc, type: 3}
+    - {fileID: 5742158462266200582, guid: 292aa70632a1ffa44b74794ef5730ccc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 292aa70632a1ffa44b74794ef5730ccc, type: 3}
@@ -431,7 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 8949798038917887321, guid: 7dac7b20eda351d458b21f57b61b978a, type: 3}
   spawnPointsContainer: {fileID: 452200325}
-  coinGenerationDelay: 2
+  coinGenerationDelay: 25
   playerManager: {fileID: 527739147}
 --- !u!1001 &578856909
 PrefabInstance:
@@ -441,6 +456,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1650022871715599979, guid: 914512e57dba19c4b8da5e8f79db9259, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650022871715599979, guid: 914512e57dba19c4b8da5e8f79db9259, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650022871715599979, guid: 914512e57dba19c4b8da5e8f79db9259, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.08
+      objectReference: {fileID: 0}
     - target: {fileID: 1650022871715599979, guid: 914512e57dba19c4b8da5e8f79db9259, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -480,6 +507,10 @@ PrefabInstance:
     - target: {fileID: 1650022871715599979, guid: 914512e57dba19c4b8da5e8f79db9259, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586113774040062132, guid: 914512e57dba19c4b8da5e8f79db9259, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.76
       objectReference: {fileID: 0}
     - target: {fileID: 6944883223027861570, guid: 914512e57dba19c4b8da5e8f79db9259, type: 3}
       propertyPath: m_Name
@@ -1009,7 +1040,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 480147989}
@@ -1391,8 +1422,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4239346505319698626, guid: 8a44290b9c265804d83e8fa3bbb7a298, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239346505319698626, guid: 8a44290b9c265804d83e8fa3bbb7a298, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239346505319698626, guid: 8a44290b9c265804d83e8fa3bbb7a298, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4239346505319698626, guid: 8a44290b9c265804d83e8fa3bbb7a298, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5708249
+      value: -2.13
       objectReference: {fileID: 0}
     - target: {fileID: 4239346505319698626, guid: 8a44290b9c265804d83e8fa3bbb7a298, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1400,7 +1443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4239346505319698626, guid: 8a44290b9c265804d83e8fa3bbb7a298, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.8793473
+      value: 0.59
       objectReference: {fileID: 0}
     - target: {fileID: 4239346505319698626, guid: 8a44290b9c265804d83e8fa3bbb7a298, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2288,8 +2331,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataToSend: Hello from Scene 1!
-  timerBar: 20
-  timerMax: 120
+  timerBar: 120
+  timerMax: 720
   healthBar: {fileID: 3989492000265486937}
   starPrefab: {fileID: 6888476710758041098, guid: e61b704282bf46e4db839ac8bb319645, type: 3}
   starsContainer: {fileID: 1712835820193428210}

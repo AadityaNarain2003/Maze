@@ -47,7 +47,8 @@ public class MazeGenerator : MonoBehaviour
         Debug.Log($"MazeGenerator received node interaction. Position: {mazeNode.Position}, Level: {mazeNode.Level}");
         gameTree.currentNode = mazeNode;
         gameTree.fixActiveMap(mazeNode);
-        float[] possibleDistances = new float[] {  1.5f, 2.5f };
+        float[] possibleDistances = new float[] { 1.5f,2.3f };
+         
 
         // Randomly select distance values for the left and right child creation
         float randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
@@ -71,17 +72,16 @@ public class MazeGenerator : MonoBehaviour
                 if(mazeNode.Level!=0)
                 {
                     Debug.Log("IN ELSE CASE");
-                    possibleDistances = new float[] {  1.5f, 2.5f };
 
                     randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
                     randomRightDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
 
-                    gameTree.createChildren(mazeNode.Left, (int)randomLeftDistance,(int) randomRightDistance);
+                    gameTree.createChildren(mazeNode.Left, randomLeftDistance, randomRightDistance);
 
                     randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
                     randomRightDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
 
-                    gameTree.createChildren(mazeNode.Right, (int)randomLeftDistance,(int) randomRightDistance);
+                    gameTree.createChildren(mazeNode.Right, randomLeftDistance, randomRightDistance);
                 }
             }
         }

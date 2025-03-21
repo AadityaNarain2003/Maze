@@ -30,7 +30,7 @@ public class Tree
         activeNode = new List<MazeNode>();
         activeNode.Add(firstNode);
     }
-    public void createChildrenRoot(MazeNode parent,int distanceLeft,int distanceRight,int value)
+    public void createChildrenRoot(MazeNode parent,float distanceLeft,float distanceRight,int value)
     {
         if(value>1)
         {
@@ -59,20 +59,20 @@ public class Tree
         parent.createLeftWall(wall,midpointLeft,parent.IncomingDirection,GetDistanceLeft-1,coin,val<=0.5,fire,val>0.5);
         parent.createRightWall(wall,midpointRight,parent.IncomingDirection,GetDistanceRight-1,coin,val>0.5,fire,val<=0.5);
 
-        float[] possibleDistances = new float[] {  2f, 3f, 4f };
+        float[] possibleDistances = new float[] {  1.5f,2.3f };
 
         float randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
         float randomRightDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
 
-        createChildrenRoot(left, (int)randomLeftDistance,(int) randomRightDistance,value+1);
+        createChildrenRoot(left, randomLeftDistance, randomRightDistance,value+1);
 
         randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
         randomRightDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
 
-        createChildrenRoot(right, (int)randomLeftDistance,(int) randomRightDistance,value+1);
+        createChildrenRoot(right, randomLeftDistance, randomRightDistance,value+1);
 
     }
-    public void createChildren(MazeNode parent,int distanceLeft,int distanceRight)
+    public void createChildren(MazeNode parent,float distanceLeft,float distanceRight)
     {
         Vector3 directionleft=rotateLeft(parent.IncomingDirection);
         Vector3 PositionLeft=parent.Position+directionleft*distanceLeft;
