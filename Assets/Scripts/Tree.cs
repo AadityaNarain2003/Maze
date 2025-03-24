@@ -74,29 +74,36 @@ public class Tree
     }
     public void createChildren(MazeNode parent,float distanceLeft,float distanceRight)
     {
-        Vector3 directionleft=rotateLeft(parent.IncomingDirection);
-        Vector3 PositionLeft=parent.Position+directionleft*distanceLeft;
-        MazeNode left=new MazeNode(PositionLeft,parent.Level+1,directionleft,nodePrefab,nodewallPrefab,parent);
-        parent.Left=left;
+        bool createTwoChildren = Random.value > 0.3f; // 70% chance to create two children
+        bool createLeftChild = createTwoChildren || Random.value > 0.5f; // If not two children, 50% chance for left vs right
 
-        Vector3 directionRight=rotateRight(parent.IncomingDirection);
-        Vector3 PositionRight=parent.Position+directionRight*distanceRight;
-        MazeNode right=new MazeNode(PositionRight,parent.Level+1,directionRight,nodePrefab,nodewallPrefab,parent);
-        parent.Right=right;
+        if (createLeftChild)
+        {
+            Vector3 directionleft = rotateLeft(parent.IncomingDirection);
+            Vector3 PositionLeft = parent.Position + directionleft * distanceLeft;
+            MazeNode left = new MazeNode(PositionLeft, parent.Level + 1, directionleft, nodePrefab, nodewallPrefab, parent);
+            parent.Left = left;
+            activeNode.Add(left);
+            
+            Vector3 midpointLeft = GetMidpoint(parent, left);
+            float GetDistanceLeft = GetDistance(parent, left);
+            float val = Random.value;
+            parent.createLeftWall(wall, midpointLeft, parent.IncomingDirection, GetDistanceLeft - 1, coin, val <= 0.5f, fire, val > 0.5f);
+        }
 
-        activeNode.Add(left);
-        activeNode.Add(right);
-
-        //now I need to create the paths from the parent to the children
-        Vector3 midpointLeft=GetMidpoint(parent,left);
-        Vector3 midpointRight=GetMidpoint(parent,right);
-        float GetDistanceLeft=GetDistance(parent,left);
-        float GetDistanceRight=GetDistance(parent,right);
-        float val=Random.value;
-        Debug.Log(val);
-        parent.createLeftWall(wall,midpointLeft,parent.IncomingDirection,GetDistanceLeft-1,coin,val<=0.5,fire,val>0.5);
-        parent.createRightWall(wall,midpointRight,parent.IncomingDirection,GetDistanceRight-1,coin,val>0.5,fire,val<=0.5);
-
+        if (createTwoChildren || !createLeftChild)
+        {
+            Vector3 directionRight = rotateRight(parent.IncomingDirection);
+            Vector3 PositionRight = parent.Position + directionRight * distanceRight;
+            MazeNode right = new MazeNode(PositionRight, parent.Level + 1, directionRight, nodePrefab, nodewallPrefab, parent);
+            parent.Right = right;
+            activeNode.Add(right);
+            
+            Vector3 midpointRight = GetMidpoint(parent, right);
+            float GetDistanceRight = GetDistance(parent, right);
+            float val = Random.value;
+            parent.createRightWall(wall, midpointRight, parent.IncomingDirection, GetDistanceRight - 1, coin, val > 0.5f, fire, val <= 0.5f);
+        }
     }
 
     public Vector3 rotateLeft(Vector3 direction)

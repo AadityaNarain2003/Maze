@@ -5,41 +5,52 @@ public class DynamicFireBalls : MonoBehaviour
     public Transform targetTransform; 
     public Transform startTransform;
     public float speed = 1.0F;
+    public float patrolDistance = 2.0f; // Distance to move left/right from center
 
     private bool movingToTarget = true;
-
     private MazeNode mazeNode;
 
     public void instantizeBallLeft()
     {
-            Vector3 pos=mazeNode.Left.Position;
-            Vector3 currpos=mazeNode.Position;
-            Vector3 opppos= mazeNode.Right.Position;
-            pos.y=0.5F;
-            currpos.y=0.5F;
-            GameObject startObj = new GameObject("StartPoint");
-            startObj.transform.position = pos;
-            GameObject endObj = new GameObject("EndPoint");
-            endObj.transform.position = opppos;
-            
-            startTransform = startObj.transform; 
-            targetTransform = endObj.transform;   
+        if (mazeNode == null)
+        {
+            Debug.LogWarning("Cannot instantiate fireball - invalid node");
+            return;
+        }
+
+        Vector3 centerPos = mazeNode.Position;
+        centerPos.y = 0.5F;
+        Vector3 leftPos = centerPos + Vector3.left * patrolDistance;
+        Vector3 rightPos = centerPos + Vector3.right * patrolDistance;
+
+        CreateFireballPath(leftPos, rightPos);
     }
 
     public void instantizeBallRight()
     {
-            Vector3 pos=mazeNode.Right.Position;
-            Vector3 currpos=mazeNode.Position;
-            Vector3 opppos= mazeNode.Left.Position;
-            pos.y=0.5F;
-            currpos.y=0.5F;
-            GameObject startObj = new GameObject("StartPoint");
-            startObj.transform.position = pos;
-            GameObject endObj = new GameObject("EndPoint");
-            endObj.transform.position = opppos;
+        if (mazeNode == null)
+        {
+            Debug.LogWarning("Cannot instantiate fireball - invalid node");
+            return;
+        }
+
+        Vector3 centerPos = mazeNode.Position;
+        centerPos.y = 0.5F;
+        Vector3 leftPos = centerPos + Vector3.left * patrolDistance;
+        Vector3 rightPos = centerPos + Vector3.right * patrolDistance;
+
+        CreateFireballPath(leftPos, rightPos);
+    }
+
+    private void CreateFireballPath(Vector3 startPos, Vector3 endPos)
+    {
+        GameObject startObj = new GameObject("StartPoint");
+        startObj.transform.position = startPos;
+        GameObject endObj = new GameObject("EndPoint");
+        endObj.transform.position = endPos;
             
-            startTransform = startObj.transform; 
-            targetTransform = endObj.transform; 
+        startTransform = startObj.transform; 
+        targetTransform = endObj.transform;
     }
 
     public void setNode(MazeNode mazeNode)
