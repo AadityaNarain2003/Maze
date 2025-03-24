@@ -59,15 +59,15 @@ public class Tree
         parent.createLeftWall(wall,midpointLeft,parent.IncomingDirection,GetDistanceLeft-1,coin,val<=0.5,fire,val>0.5);
         parent.createRightWall(wall,midpointRight,parent.IncomingDirection,GetDistanceRight-1,coin,val>0.5,fire,val<=0.5);
 
-        float[] possibleDistances = new float[] {  1.5f,2.3f };
+        float[] possibleDistances = new float[] {  2.0f,2.3f,2.5f };
 
-        float randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
-        float randomRightDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
+        float randomLeftDistance = possibleDistances[Random.Range(0, possibleDistances.Length)];
+        float randomRightDistance = possibleDistances[Random.Range(0, possibleDistances.Length)];
 
         createChildrenRoot(left, randomLeftDistance, randomRightDistance,value+1);
 
-        randomLeftDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
-        randomRightDistance = possibleDistances[Random.Range(1, possibleDistances.Length)];
+        randomLeftDistance = possibleDistances[Random.Range(0, possibleDistances.Length)];
+        randomRightDistance = possibleDistances[Random.Range(0, possibleDistances.Length)];
 
         createChildrenRoot(right, randomLeftDistance, randomRightDistance,value+1);
 
