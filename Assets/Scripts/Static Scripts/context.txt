@@ -1,0 +1,199 @@
+# Maze Game Project Context
+
+## Overview
+
+This project implements a maze game where the player navigates a dynamically generated corridor-like environment. The environment is constructed using a tree-based data structure, where each node represents a point in the maze, and the connections between nodes define the corridors. The player moves through these corridors, collecting coins and avoiding fireballs, all while a timer counts down.
+
+## Core Components
+
+### 1. MazeNode (MazeNode.cs)
+
+-   **Purpose:** Represents a single point (node) within the maze.
+-   **Attributes:**
+    -   `Position`: `Vector3` - The world-space coordinates of the node.
+    -   `Level`: `int` - The depth of the node in the tree (root is level 0).
+    -   `IncomingDirection`: `Vector3` - The direction from which the player entered this node.
+    -   `Parent`: `MazeNode` - The parent node in the tree.
+    -   `Left`: `MazeNode` - The left child node.
+    -   `Right`: `MazeNode` - The right child node.
+    -   `leftWall`, `rightWall`: `GameObject` - The wall objects that form the corridor segments leading to the left and right children.
+    -   `active`: `bool` - Indicates if the node is currently active (visible/interactable).
+    -   `nodeobject`: `GameObject` - The instantiated `nodeprefab` representing this node.
+    -   `initialnodeWall`: `GameObject` - The instantiated `nodewallprefab` representing the wall behind the node.
+    -   `nodewallobject`: `GameObject` - The instantiated `nodewallprefab` representing the wall behind the node.
+    - `coin`: `GameObject` - The instantiated coin object.
+    - `fireball`: `GameObject` - The instantiated fireball object.
+    - `isCoinPresent`: `bool` - Indicates if a coin is present at this node.
+-   **Methods:**
+    -   `MazeNode(Vector3 position, int level, Vector3 incomingDirection, GameObject node, GameObject nodewall, MazeNode parent = null)`: Constructor to initialize a new node, instantiate the `nodeprefab` and `nodewallprefab` and add a `MazeNodeComponent`.
+    -   `createLeftWall(GameObject wall, Vector3 position, Vector3 direction, float scale, GameObject coin, bool isCoin,GameObject fire, bool isFire)`: Creates the left corridor wall (`wall prefab`), places a coin if `isCoin` is true, and places a fireball if `isFire` is true.
+    -   `createRightWall(GameObject wall, Vector3 position, Vector3 direction, float scale, GameObject coin, bool isCoin,GameObject fire, bool isFire)`: Creates the right corridor wall (`wall prefab`), places a coin if `isCoin` is true, and places a fireball if `isFire` is true.
+
+### 2. Tree (Tree.cs)
+
+-   **Purpose:** Manages the tree structure of the maze, creates nodes, and generates the corridor layout.
+-   **Attributes:**
+    -   `currentNode`: `MazeNode` - The node the player is currently interacting with.
+    -   `firstNode`: `MazeNode` - The root node of the tree.
+    -   `activeNode`: `List<MazeNode>` - A list of nodes that are currently active (visible/interactable).
+    -   `nodePrefab`: `GameObject` - The `nodeprefab`.
+    -   `nodewallPrefab`: `GameObject` - The `nodewallprefab`.
+    -   `wall`: `GameObject` - The `wall prefab`.
+    - `fire`: `GameObject` - The `fireprefab`.
+    - `coin`: `GameObject` - The `coinprefab`.
+-   **Methods:**
+    -   `Tree(GameObject prefab, GameObject wallprefab, GameObject coinprefab,GameObject fire, GameObject wall, Vector3 initialpos, Vector3 initialDirection)`: Constructor to initialize the tree with the root node.
+    -   `createChildrenRoot(MazeNode parent, float distanceLeft, float distanceRight, int value)`: Recursively creates child nodes for the root node, generating the initial maze structure.
+    -   `createChildren(MazeNode parent, float distanceLeft, float distanceRight)`: Creates left and right child nodes for a given parent node.
+    -   `rotateLeft(Vector3 direction)`: Rotates a direction vector 90 degrees to the left.
+    -   `rotateRight(Vector3 direction)`: Rotates a direction vector 90 degrees to the right.
+    -   `GetMidpoint(MazeNode nodeA, MazeNode nodeB)`: Calculates the midpoint between two nodes.
+    -   `GetDistance(MazeNode nodeA, MazeNode nodeB)`: Calculates the distance between two nodes.
+    -   `fixActiveMap(MazeNode mazeNode)`: Manages the visibility of nodes and walls, ensuring only the relevant section of the maze is active.
+
+### 3. MazeGenerator (MazeGenerator.cs)
+
+-   **Purpose:** The main script that initializes the maze and handles node interactions.
+-   **Attributes:**
+    -   `nodeprefab`: `GameObject` - The `nodeprefab`.
+    -   `nodewallprefab`: `GameObject` - The `nodewallprefab`.
+    -   `wall`: `GameObject` - The `wall prefab`.
+    -   `coinprefab`: `GameObject` - The `coinprefab`.
+    -   `gameTree`: `Tree` - The tree structure representing the maze.
+    - `fireprefab`: `GameObject` - The `fireprefab`.
+-   **Methods:**
+    -   `Start()`: Initializes the `gameTree`, creates the initial `nodewallprefab`, and subscribes to the `NodeCollisionHandler.OnNodeInteracted` event.
+    -   `OnDestroy()`: Unsubscribes from the `NodeCollisionHandler.OnNodeInteracted` event.
+    -   `HandleNodeInteraction(MazeNode mazeNode)`: Called when the player interacts with a node. It creates new child nodes, extends the maze, and manages the `activeNode` list.
+
+### 4. NodeCollisionHandler (NodeCollisionHandler.cs)
+
+-   **Purpose:** Detects collisions between the player and a node (`nodeprefab`).
+-   **Attributes:**
+    -   `OnNodeInteracted`: `event Action<MazeNode>` - An event that is triggered when the player collides with a node.
+-   **Methods:**
+    -   `OnTriggerEnter(Collider other)`: Detects when the player collides with a node, retrieves the `MazeNode` data, and invokes the `OnNodeInteracted` event.
+    - `OnTriggerExit(Collider other)`: Detects when the player exits a node, and resets the trigger.
+
+### 5. MazeNodeComponent (Implicitly Created)
+
+-   **Purpose:** A component added to each `nodeprefab` instance to link it to its corresponding `MazeNode` data.
+-   **Attributes:**
+    -   `Node`: `MazeNode` - A reference to the `MazeNode` object.
+-   **Methods:**
+    -   `Initialize(MazeNode node)`: Sets the `Node` reference.
+
+### 6. PlayerManager (PlayerManager.cs)
+
+-   **Purpose:** Manages the player's interactions with coins and fireballs, and handles the timer.
+-   **Attributes:**
+    -   `coin_add`: `int` - The amount of time added when a coin is collected.
+    -   `fire_subtract`: `int` - The amount of time subtracted when a fireball is hit.
+    -   `Initial_time`: `int` - The initial time for the timer.
+    -   `timerText`: `TextMeshProUGUI` - The UI text element for displaying the timer.
+    - `timer`: `Timer` - The timer component.
+-   **Methods:**
+    -   `Start()`: Initializes the timer.
+    -   `Update()`: Checks if the timer has run out.
+    -   `OnTriggerEnter(Collider other)`: Detects collisions with coins (adds time) and fireballs (subtracts time).
+
+### 7. Timer (Implicitly Created)
+- **Purpose**: Manages the timer of the game.
+- **Attributes**:
+    - `TimeLeft`: `float` - The time left in the game.
+    - `timerText`: `TextMeshProUGUI` - The UI text element for displaying the timer.
+- **Methods**:
+    - `InitializeTimer(int time)`: Initializes the timer with the given time.
+    - `setTMP()`: Sets the timer text.
+    - `AddTime(int time)`: Adds time to the timer.
+    - `SubtractTime(int time)`: Subtracts time from the timer.
+
+### 8. CoinAnimationHandler (Implicitly Created)
+- **Purpose**: Handles the animation of the coin.
+- **Methods**:
+    - `StartCoinAnimation(GameObject coin)`: Animates the coin.
+
+### 9. DynamicFireBalls (Implicitly Created)
+- **Purpose**: Handles the movement of the fireball.
+- **Methods**:
+    - `setNode(MazeNode node)`: Sets the node of the fireball.
+    - `instantizeBallLeft()`: Instantiates the fireball to the left.
+    - `instantizeBallRight()`: Instantiates the fireball to the right.
+
+### 10. DamageEffect (Implicitly Created)
+- **Purpose**: Handles the damage effect when the player collides with a coin or a fireball.
+- **Methods**:
+    - `TriggerDamageEffect(Color color)`: Triggers the damage effect with the given color.
+
+## Game Logic and Corridor Creation
+
+1.  **Initialization:**
+    -   `MazeGenerator.Start()`:
+        -   Creates a new `Tree` object.
+        -   Creates the root `MazeNode` at the `initialPosition` with the `initialDirection`.
+        -   Instantiates the initial `nodewallprefab` behind the root node.
+        -   Subscribes to the `NodeCollisionHandler.OnNodeInteracted` event.
+
+2.  **Player Movement and Node Interaction:**
+    -   The player moves through the environment.
+    -   When the player collides with a `nodeprefab` (a node), `NodeCollisionHandler.OnTriggerEnter()` is called.
+    -   `NodeCollisionHandler` retrieves the `MazeNode` data from the `MazeNodeComponent` attached to the `nodeprefab`.
+    -   `NodeCollisionHandler` invokes the `OnNodeInteracted` event, passing the `MazeNode` data.
+
+3.  **Maze Expansion:**
+    -   `MazeGenerator.HandleNodeInteraction(MazeNode mazeNode)` is called when the `OnNodeInteracted` event is triggered.
+    -   `HandleNodeInteraction` does the following:
+        -   Sets the `gameTree.currentNode` to the interacted `mazeNode`.
+        -   Calls `gameTree.fixActiveMap(mazeNode)` to manage the visibility of the nodes and walls.
+        -   Randomly selects distances for the left and right child nodes.
+        -   If the node is a leaf node (no children), it calls `gameTree.createChildrenRoot()` or `gameTree.createChildren()` to create new child nodes.
+        -   `createChildrenRoot` is used for the first two levels of the tree, and `createChildren` is used for the rest.
+        - `createChildrenRoot` recursively creates the children of the children.
+        -   `createChildren` creates the left and right children of the parent node.
+        -   `createChildren` and `createChildrenRoot` create the walls between the parent and the children, and randomly places coins and fireballs.
+        -   `rotateLeft` and `rotateRight` are used to calculate the direction of the child nodes.
+        - `GetMidpoint` and `GetDistance` are used to calculate the position and scale of the walls.
+        - `fixActiveMap` is used to set the active nodes and walls, and to set the inactive nodes and walls.
+
+4.  **Corridor Creation:**
+    -   The `createLeftWall` and `createRightWall` methods in `MazeNode` are responsible for creating the corridor segments.
+    -   They instantiate the `wall prefab` at the midpoint between the parent and child nodes.
+    -   The wall is rotated to face the `IncomingDirection` of the parent node.
+    -   The wall's scale is adjusted based on the distance between the parent and child nodes.
+    -   Coins and fireballs are randomly placed along the corridors.
+    - The `nodewallprefab` is instantiated behind each node, perpendicular to the `IncomingDirection`.
+
+5. **Coin and Fireball Interaction**
+    - When the player collides with a coin, the `PlayerManager` adds time to the timer.
+    - When the player collides with a fireball, the `PlayerManager` subtracts time from the timer.
+    - The `DamageEffect` script is used to show a visual effect when the player collides with a coin or a fireball.
+    - The `CoinAnimationHandler` script is used to animate the coin.
+    - The `DynamicFireBalls` script is used to move the fireball.
+
+6. **Timer**
+    - The `Timer` script is used to manage the timer of the game.
+    - The `PlayerManager` script uses the `Timer` script to add or subtract time.
+
+## File Relationships
+
+-   `MazeGenerator` is the main controller, using `Tree` to manage the maze structure.
+-   `Tree` creates and manages `MazeNode` objects.
+-   `MazeNode` creates `wall prefab`, `nodewallprefab`, `coinprefab`, and `fireprefab` instances.
+-   `NodeCollisionHandler` detects collisions with `nodeprefab` and triggers events.
+-   `PlayerManager` handles player interactions with coins and fireballs, and manages the timer.
+- `Timer` manages the timer of the game.
+- `CoinAnimationHandler` animates the coin.
+- `DynamicFireBalls` moves the fireball.
+- `DamageEffect` shows a visual effect when the player collides with a coin or a fireball.
+
+## Prefabs
+
+-   **nodeprefab:** Represents a node in the maze, acts as a trigger for player interaction.
+-   **wall prefab:** Represents a section of the corridor (two parallel walls).
+-   **nodewallprefab:** Represents a single wall, placed behind each node.
+- **coinprefab**: Represents a coin.
+- **fireprefab**: Represents a fireball.
+
+## Summary
+
+The maze is generated dynamically as the player explores it. The `Tree` data structure, combined with the `MazeNode` class, allows for the creation of a branching, corridor-like environment. The `MazeGenerator` and `NodeCollisionHandler` scripts manage the expansion of the maze and player interactions. The `PlayerManager` script handles the player's interactions with coins and fireballs, and manages the timer. The `Timer` script manages the timer of the game. The `CoinAnimationHandler` script animates the coin. The `DynamicFireBalls` script moves the fireball. The `DamageEffect` script shows a visual effect when the player collides with a coin or a fireball. The prefabs are used to create the visual representation of the maze.
