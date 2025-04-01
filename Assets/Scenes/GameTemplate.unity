@@ -315,6 +315,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 692657524}
+    - target: {fileID: 1555084110325245164, guid: 4d4c6a95b4bba724ea230df23794bb59, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4299401433917009442, guid: 4d4c6a95b4bba724ea230df23794bb59, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2081,7 +2085,7 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
   m_EnableInputActions: 1
-  m_ModelPrefab: {fileID: 3475118261464492563, guid: 9f3369e30fbd31f4bb596b1a99babe83, type: 3}
+  m_ModelPrefab: {fileID: 3475118261464492563, guid: 025aba7b1ed96eb4fb91a94118052857, type: 3}
   m_ModelParent: {fileID: 1784940192}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
