@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coin_add: 15
   fire_subtract: 30
-  Initial_time: 90
+  Initial_time: 1200
   timerText: {fileID: 0}
 --- !u!114 &839833546
 MonoBehaviour:

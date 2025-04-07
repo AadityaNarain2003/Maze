@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("wow " + other.gameObject.name);
+        // Debug.Log("wow " + other.gameObject.name);
         // For coins
         if (other.gameObject.layer == LayerMask.NameToLayer("coin"))
         {   
