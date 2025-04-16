@@ -1819,7 +1819,7 @@ Transform:
   m_GameObject: {fileID: 689362344362270508}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.67265016, z: -0, w: 0.7399607}
-  m_LocalPosition: {x: 0.19647586, y: 0.18, z: -0.027703404}
+  m_LocalPosition: {x: -1.26, y: 0.18, z: -0.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2332,7 +2332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataToSend: Hello from Scene 1!
   timerBar: 120
-  timerMax: 720
+  timerMax: 1200
   healthBar: {fileID: 3989492000265486937}
   starPrefab: {fileID: 6888476710758041098, guid: e61b704282bf46e4db839ac8bb319645, type: 3}
   starsContainer: {fileID: 1712835820193428210}

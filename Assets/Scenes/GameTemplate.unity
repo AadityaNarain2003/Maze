@@ -1034,14 +1034,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839833535}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 120535594}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &839833541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coin_add: 15
   fire_subtract: 30
-  Initial_time: 1200
+  Initial_time: 90
   timerText: {fileID: 0}
 --- !u!114 &839833546
 MonoBehaviour:
@@ -1188,7 +1188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataToSend: Hello from Scene 1!
   timerBar: 120
-  timerMax: 720
+  timerMax: 1200
   healthBar: {fileID: 2090154010}
   starPrefab: {fileID: 6888476710758041098, guid: 0041eefd18f6bff448be6cf843ce4bd0, type: 3}
   starsContainer: {fileID: 1997203038}
